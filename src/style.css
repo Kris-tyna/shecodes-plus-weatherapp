@@ -1,0 +1,94 @@
+body {
+  font-family: "PT Mono", monospace;
+  color: rgb(29, 26, 26);
+  background: linear-gradient(to top, #2e5cd8 0%, #04befe 100%);
+  height: 100vh;
+}
+
+h1 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 40px;
+  font-weight: 400;
+  color: rgb(29, 26, 26);
+}
+footer {
+  font-size: 12px;
+}
+form {
+  font-size: 13px;
+}
+#current-location {
+  position: relative;
+  left: 352px;
+  top: -26px;
+  font-size: 13px;
+  background-color: #efefef;
+  color: #000000;
+  border-style: none;
+  border: solid #767676 1px;
+  padding: 2.5px 7px;
+}
+.container {
+  padding: 30px 0px;
+}
+.card {
+  font-size: 14px;
+  border: solid 1.5px rgb(29, 26, 26);
+  margin: 5px 0;
+}
+.day {
+  font-weight: 400;
+}
+.description {
+  font-size: 12px;
+}
+.weather-icon {
+  font-size: 40px;
+}
+.card-body {
+  padding: 0px 20px 20px;
+  height: 220px;
+}
+.text-center {
+  padding: 10px 0;
+}
+.sun-wrap {
+  position: relative;
+}
+.sun,
+.sun1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: fit-content;
+  transform: rotate(-360);
+  transform: scale;
+  padding: 50px;
+  font-size: 50px;
+  animation-name: spin;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  /* animation-direction: alternate-reverse; */
+  transform-origin: 50% 48.5%;
+}
+.sun1 {
+  animation-name: unset;
+  clip-path: ellipse(14.7px 14.7px at 49.7% 47.6%);
+}
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
