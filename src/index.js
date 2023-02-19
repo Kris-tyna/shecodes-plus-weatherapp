@@ -69,15 +69,15 @@ function showTemperature(response) {
   let temperature = Math.round(response.data.main.temp);
   let wind = Math.round(response.data.wind.speed * 3.6);
   let humidity = response.data.main.humidity;
-
-  console.log(response);
+  let description = response.data.weather[0].description;
 
   description = description.replace(/(^.)/, (match) => match.toUpperCase());
 
+  console.log(response);
+
   document.querySelector("h1").innerHTML = response.data.name;
 
-  document.querySelector("#current-description").innerHTML =
-    response.data.weather[0].description;
+  document.querySelector("#current-description").innerHTML = description;
 
   let currentTemperature = document.querySelector("#current-temperature");
   currentTemperature.innerHTML = `${temperature}°`;
