@@ -141,6 +141,7 @@ function changeUnit(event) {
     currentTempUnit = "celsius";
   }
 }
+
 let mainTemperature = document.querySelector("#current-temperature");
 mainTemperature.addEventListener("click", changeUnit);
 let currentTempUnit = "celsius";
