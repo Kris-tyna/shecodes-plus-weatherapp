@@ -1,4 +1,4 @@
-// TIME HANDLING
+// TIME + DATE HANDLING
 
 let now = new Date();
 
@@ -80,7 +80,7 @@ function showTemperature(response) {
   document.querySelector("#current-description").innerHTML = description;
 
   let currentTemperature = document.querySelector("#current-temperature");
-  currentTemperature.innerHTML = `${temperature}°`;
+  currentTemperature.innerHTML = `${temperature}°C`;
 
   let currentWind = document.querySelector("#wind");
   currentWind.innerHTML = `💨 ${wind}km/h`;
@@ -134,10 +134,10 @@ function changeUnit(event) {
   let toFahrenheit = (celsius) => Math.round(celsius * (9 / 5) + 32);
   let toCelsius = (fahrenheit) => Math.round((fahrenheit - 32) * (5 / 9));
   if (currentTempUnit === "celsius") {
-    tempEl.innerHTML = `${toFahrenheit(parseFloat(tempEl.innerText))}°`;
+    tempEl.innerHTML = `${toFahrenheit(parseFloat(tempEl.innerText))}°F`;
     currentTempUnit = "fahrenheit";
   } else {
-    tempEl.innerHTML = `${toCelsius(parseFloat(tempEl.innerText))}°`;
+    tempEl.innerHTML = `${toCelsius(parseFloat(tempEl.innerText))}°C`;
     currentTempUnit = "celsius";
   }
 }
