@@ -66,14 +66,14 @@ timeChange(now);
 // to do - add emoji mapping
 
 function showTemperature(response) {
+  console.log(response);
+
   let temperature = Math.round(response.data.main.temp);
   let wind = Math.round(response.data.wind.speed * 3.6);
   let humidity = response.data.main.humidity;
   let description = response.data.weather[0].description;
 
   description = description.replace(/(^.)/, (match) => match.toUpperCase());
-
-  console.log(response);
 
   document.querySelector("h1").innerHTML = response.data.name;
 
