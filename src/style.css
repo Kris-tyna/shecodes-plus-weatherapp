@@ -11,8 +11,9 @@ h1 {
   font-weight: 400;
   color: rgb(29, 26, 26);
 }
-footer {
-  font-size: 12px;
+a {
+  font-size: 16px;
+  color: #1c1a1a;
 }
 form {
   font-size: 13px;
