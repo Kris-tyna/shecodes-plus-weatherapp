@@ -113,8 +113,8 @@ function showTemperature(response) {
 }
 
 function showPosition(position) {
-  let latitude = position.data.coordinates.latitude;
-  let longitude = position.data.coordinates.longitude;
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
 
   let apiKey = "7c4obb17082t10ffeca04a159ac523a0";
   let units = "metric";
