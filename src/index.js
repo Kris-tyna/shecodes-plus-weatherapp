@@ -89,6 +89,7 @@ function showTemperature(response) {
   console.log(response);
 
   let temperature = Math.round(response.data.temperature.current);
+  let relativeTemperature = Math.round(response.data.temperature.feels_like);
   let wind = Math.round(response.data.wind.speed * 3.6);
   let humidity = response.data.temperature.humidity;
   let description = response.data.condition.description;
@@ -105,6 +106,9 @@ function showTemperature(response) {
 
   let currentTemperature = document.querySelector("#current-temperature");
   currentTemperature.innerHTML = `${temperature}°C`;
+
+  let feelTemperature = document.querySelector("#feel-temperature");
+  feelTemperature.innerHTML = `/ ${relativeTemperature}°C`;
 
   let currentWind = document.querySelector("#wind");
   currentWind.innerHTML = `💨 ${wind}km/h`;
