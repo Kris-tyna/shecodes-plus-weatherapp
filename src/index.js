@@ -92,6 +92,7 @@ function showTemperature(response) {
   let wind = Math.round(response.data.wind.speed * 3.6);
   let humidity = response.data.temperature.humidity;
   let description = response.data.condition.description;
+
   description = description.replace(/(^.)/, (match) => match.toUpperCase());
 
   let emoji = emojiMap[response.data.condition.icon];
@@ -128,7 +129,6 @@ function search(city) {
   let apiKey = "7c4obb17082t10ffeca04a159ac523a0";
   let units = "metric";
   let apiUrlCity = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=${units}`;
-  console.log(apiUrlCity);
 
   axios.get(apiUrlCity).then(showTemperature);
 }
