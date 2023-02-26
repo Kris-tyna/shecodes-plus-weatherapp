@@ -120,6 +120,8 @@ function showPosition(position) {
   let apiKey = "7c4obb17082t10ffeca04a159ac523a0";
   let units = "metric";
 
+  document.querySelector("#search-input").value = "";
+
   let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=${units}`;
 
   axios.get(apiUrl).then(showTemperature);
