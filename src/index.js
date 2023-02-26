@@ -65,15 +65,24 @@ timeChange(now);
 // MAIN
 
 const emojiMap = {
-  "Clear sky": "☀️",
-  "Few clouds": "🌤️",
-  "Scattered clouds": "☁️",
-  "Broken clouds": "⛅️",
-  "Shower rain": "🌦️",
-  Rain: "☔️",
-  Thunderstorm: "🌩️",
-  "Light snow": "☃️",
-  Mist: "😶‍🌫️",
+  "clear-sky-day": "☀️",
+  "clear-sky-night": "🌙",
+  "few-clouds-day": "🌤️",
+  "few-clouds-night": "☁️",
+  "scattered-clouds-day": "☁️",
+  "scattered-clouds-night": "☁️",
+  "broken-clouds-day": "⛅️",
+  "broken-clouds-night": "☁️",
+  "shower-rain-day": "🌦️",
+  "shower-rain-night": "🌧️",
+  "rain-day": "☔️",
+  "rain-night": "🌧️",
+  "thunderstorm-day": "🌩️",
+  "thunderstorm-night": "🌩️",
+  "snow-day": "☃️",
+  "snow-night": "☃️",
+  "mist-day": "😶‍🌫️",
+  "mist-night": "😶‍🌫️",
 };
 
 function showTemperature(response) {
@@ -85,7 +94,7 @@ function showTemperature(response) {
   let description = response.data.condition.description;
   description = description.replace(/(^.)/, (match) => match.toUpperCase());
 
-  let emoji = emojiMap[description];
+  let emoji = emojiMap[response.data.condition.icon];
 
   document.querySelector("h1").innerHTML = response.data.city;
 
