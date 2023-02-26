@@ -63,21 +63,35 @@ dateListUpdate(now);
 timeChange(now);
 
 // MAIN
-// to do - add emoji mapping
+
+const emojiMap = {
+  "Clear sky": "☀️",
+  "Few clouds": "🌤️",
+  "Scattered clouds": "☁️",
+  "Broken clouds": "⛅️",
+  "Shower rain": "🌦️",
+  Rain: "☔️",
+  Thunderstorm: "🌩️",
+  "Light snow": "☃️",
+  Mist: "😶‍🌫️",
+};
 
 function showTemperature(response) {
   console.log(response);
 
-  let temperature = Math.round(response.data.main.temp);
+  let temperature = Math.round(response.data.temperature.current);
   let wind = Math.round(response.data.wind.speed * 3.6);
-  let humidity = response.data.main.humidity;
-  let description = response.data.weather[0].description;
-
+  let humidity = response.data.temperature.humidity;
+  let description = response.data.condition.description;
   description = description.replace(/(^.)/, (match) => match.toUpperCase());
 
-  document.querySelector("h1").innerHTML = response.data.name;
+  let emoji = emojiMap[description];
+
+  document.querySelector("h1").innerHTML = response.data.city;
 
   document.querySelector("#current-description").innerHTML = description;
+
+  document.querySelector("#weather-icon").innerHTML = emoji;
 
   let currentTemperature = document.querySelector("#current-temperature");
   currentTemperature.innerHTML = `${temperature}°C`;
@@ -90,21 +104,22 @@ function showTemperature(response) {
 }
 
 function showPosition(position) {
-  let latitude = position.coords.latitude;
-  let longitude = position.coords.longitude;
+  let latitude = position.data.coordinates.latitude;
+  let longitude = position.data.coordinates.longitude;
 
-  let apiKey = "7746bdeabca928cfedcad71e52fd9d66";
+  let apiKey = "7c4obb17082t10ffeca04a159ac523a0";
   let units = "metric";
 
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=${units}`;
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?lon=${longitude}&lat=${latitude}&key=${apiKey}&units=${units}`;
 
   axios.get(apiUrl).then(showTemperature);
 }
 
 function search(city) {
-  let apiKey = "7746bdeabca928cfedcad71e52fd9d66";
+  let apiKey = "7c4obb17082t10ffeca04a159ac523a0";
   let units = "metric";
-  let apiUrlCity = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
+  let apiUrlCity = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=${units}`;
+  console.log(apiUrlCity);
 
   axios.get(apiUrlCity).then(showTemperature);
 }
@@ -142,8 +157,11 @@ function changeUnit(event) {
   }
 }
 
+// TO DO? - switching between C/F
+//  current-temperature.classlist.add/remove("active")
+
 let mainTemperature = document.querySelector("#current-temperature");
 mainTemperature.addEventListener("click", changeUnit);
 let currentTempUnit = "celsius";
 
-search("Chamonix");
+search("Chamonix-Mont-Blanc");
