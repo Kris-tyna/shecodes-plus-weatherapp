@@ -17,6 +17,12 @@ a {
   text-decoration: none;
   font-weight: bold;
 }
+
+a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 form {
   font-size: 13px;
 }
