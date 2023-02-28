@@ -31,6 +31,7 @@ function formatDate(theDate) {
   let day = days[theDate.getDay()];
   let month = months[theDate.getMonth()];
   let date = theDate.getDate();
+  if (date < 10) date = "0" + date;
   let year = theDate.getFullYear();
   let time = theDate.getHours();
   if (time < 10) time = "0" + time;
