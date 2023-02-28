@@ -33,6 +33,7 @@ function formatDate(theDate) {
   let date = theDate.getDate();
   let year = theDate.getFullYear();
   let time = theDate.getHours();
+  if (time < 10) time = "0" + time;
   let minutes = theDate.getMinutes();
   if (minutes < 10) minutes = "0" + minutes;
   let postfix = "th";
