@@ -87,6 +87,65 @@ const emojiMap = {
   "mist-night": "😶‍🌫️",
 };
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  console.log(day);
+
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  return days[day];
+}
+
+function displayForecast(response) {
+  console.log(response);
+
+  let forecast = response.data.daily;
+  let forecastElement = document.querySelector("#weather-forecast");
+  let forecastHTML = `<div class="row">`;
+  forecast.forEach(function (forecastDay, index) {
+    let emoji = emojiMap[forecastDay.condition.icon];
+    if (index > 0 && index < 5) {
+      forecastHTML =
+        forecastHTML +
+        ` 
+  <div class="col-3">
+  <div class="card">
+  <div class="col">
+  <div class="day-forecast">${formatDay(forecastDay.time)}</div>
+  <div class="weather-icon-forecast">${emoji}<div class="description-forecast">${forecastDay.condition.description.replace(
+          /(^.)/,
+          (match) => match.toUpperCase()
+        )}</div>
+  </div>
+  <div><strong class="temperature-forecast"> ${Math.round(
+    forecastDay.temperature.minimum
+  )}°C</strong> <span
+  class="feel-temperature-forecast">/${Math.round(
+    forecastDay.temperature.maximum
+  )}°C</span></div>
+  <div class="wind-forecast">💨 ${Math.round(
+    forecastDay.wind.speed * 3.6
+  )}km/h</div>
+  <div class="humidity-forecast">💦 ${forecastDay.temperature.humidity}%</div>
+  </div>
+  </div>
+  </div>
+  `;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function showTemperature(response) {
   console.log(response);
 
@@ -141,10 +200,19 @@ function search(city) {
   axios.get(apiUrlCity).then(showTemperature);
 }
 
+function getForecast(city) {
+  let apiKey = "7c4obb17082t10ffeca04a159ac523a0";
+  let units = "metric";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=${units}`;
+
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function handleSubmit(event) {
   event.preventDefault();
   let city = document.querySelector("#search-input").value;
   search(city);
+  getForecast(city);
 }
 
 function geoLocation(event) {
@@ -182,3 +250,4 @@ mainTemperature.addEventListener("click", changeUnit);
 let currentTempUnit = "celsius";
 
 search("Chamonix-Mont-Blanc");
+getForecast("Chamonix-Mont-Blanc");
