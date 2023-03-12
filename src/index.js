@@ -113,7 +113,7 @@ function displayForecast(response) {
   let forecastHTML = `<div class="row">`;
   forecast.forEach(function (forecastDay, index) {
     let emoji = emojiMap[forecastDay.condition.icon];
-    if (index < 4) {
+    if (index > 0 && index < 5) {
       forecastHTML =
         forecastHTML +
         ` 
@@ -121,9 +121,10 @@ function displayForecast(response) {
   <div class="card">
   <div class="col">
   <div class="day-forecast">${formatDay(forecastDay.time)}</div>
-  <div class="weather-icon-forecast">${emoji}<div class="description-forecast">${
-          forecastDay.condition.description
-        }</div>
+  <div class="weather-icon-forecast">${emoji}<div class="description-forecast">${forecastDay.condition.description.replace(
+          /(^.)/,
+          (match) => match.toUpperCase()
+        )}</div>
   </div>
   <div><strong class="temperature-forecast"> ${Math.round(
     forecastDay.temperature.minimum
