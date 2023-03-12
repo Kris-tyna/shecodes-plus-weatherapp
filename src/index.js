@@ -87,8 +87,47 @@ const emojiMap = {
   "mist-night": "😶‍🌫️",
 };
 
+function displayForecast(response) {
+  console.log(response.data.daily);
+  let forecastElement = document.querySelector("#weather-forecast");
+  let days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  let forecastHTML = `<div class="row">`;
+  days.forEach(function (forecastDay, index) {
+    if (index < 4) {
+      forecastHTML =
+        forecastHTML +
+        ` 
+  <div class="col-3">
+  <div class="card">
+  <div class="col">
+  <div class="day-forecast">Tuesday <br /> 09/01/2023</div>
+  <div class="weather-icon-forecast">☀️<div class="description-forecast">Sun is out</div>
+  </div>
+  <div><strong class="temperature-forecast"> 5°</strong> <span
+  class="feel-temperature-forecast">/0°</span></div>
+  <div class="wind-forecast">💨 22km/h</div>
+  <div class="humidity-forecast">💦 94%</div>
+  </div>
+  </div>
+  </div>
+  `;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function showTemperature(response) {
-  console.log(response);
+  // console.log(response);
 
   let temperature = Math.round(response.data.temperature.current);
   let relativeTemperature = Math.round(response.data.temperature.feels_like);
@@ -141,10 +180,20 @@ function search(city) {
   axios.get(apiUrlCity).then(showTemperature);
 }
 
+function getForecast(city) {
+  let apiKey = "7c4obb17082t10ffeca04a159ac523a0";
+  let units = "metric";
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=${units}`;
+  console.log(apiUrl);
+
+  axios.get(apiUrl).then(displayForecast);
+}
+
 function handleSubmit(event) {
   event.preventDefault();
   let city = document.querySelector("#search-input").value;
   search(city);
+  getForecast(city);
 }
 
 function geoLocation(event) {
@@ -182,3 +231,4 @@ mainTemperature.addEventListener("click", changeUnit);
 let currentTempUnit = "celsius";
 
 search("Chamonix-Mont-Blanc");
+getForecast("Chamonix-Mont-Blanc");
