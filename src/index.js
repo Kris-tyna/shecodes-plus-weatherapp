@@ -90,7 +90,6 @@ const emojiMap = {
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
-  console.log(day);
 
   let days = [
     "Sunday",
@@ -106,8 +105,6 @@ function formatDay(timestamp) {
 }
 
 function displayForecast(response) {
-  console.log(response);
-
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#weather-forecast");
   let forecastHTML = `<div class="row">`;
@@ -147,8 +144,6 @@ function displayForecast(response) {
 }
 
 function showTemperature(response) {
-  console.log(response);
-
   let temperature = Math.round(response.data.temperature.current);
   let relativeTemperature = Math.round(response.data.temperature.feels_like);
   let wind = Math.round(response.data.wind.speed * 3.6);
@@ -160,6 +155,8 @@ function showTemperature(response) {
   let emoji = emojiMap[response.data.condition.icon];
 
   document.querySelector("h1").innerHTML = response.data.city;
+
+  getForecast(response.data.city);
 
   document.querySelector("#current-description").innerHTML = description;
 
